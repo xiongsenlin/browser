@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<!-- 该配置文件主要用于完成对mybatis的一些基本配置，主要包括properties，settings，typeAliases等内容
+ 详情参见：http://mybatis.github.io/mybatis-3/configuration.html# -->
+<configuration>
+    <!-- 配置Mybatis常用的一些开关 -->
+    <settings>
+        <setting name="cacheEnabled" value="true"/>
+        <setting name="lazyLoadingEnabled" value="true"/>
+        <setting name="multipleResultSetsEnabled" value="true"/>
+        <setting name="defaultStatementTimeout" value="25000"/>
+    </settings>
+
+</configuration>
