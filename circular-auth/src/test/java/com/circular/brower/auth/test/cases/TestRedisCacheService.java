@@ -1,9 +1,9 @@
 package com.circular.brower.auth.test.cases;
 
 import com.circular.brower.auth.test.base.TestBase;
-import com.circular.browser.auth.dao.model.User;
 import com.circular.browser.auth.service.cache.CacheItem;
 import com.circular.browser.auth.service.cache.CacheService;
+import com.circular.browser.dao.model.User;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 

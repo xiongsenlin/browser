@@ -1,6 +1,6 @@
 package com.circular.browser.auth.service.cache;
 
-import com.circular.brower.common.util.SerializeUtil;
+import com.circular.browser.common.util.SerializeUtil;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,6 +1,6 @@
 package com.circular.browser.auth.service.message;
 
-import com.circular.brower.common.util.ThreadPoolManager;
+import com.circular.browser.common.util.ThreadPoolManager;
 import com.circular.browser.auth.util.Constants;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;

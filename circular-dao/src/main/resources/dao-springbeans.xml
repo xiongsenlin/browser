@@ -10,6 +10,6 @@
 				http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
 				http://www.springframework.org/schema/util
 				http://www.springframework.org/schema/util/spring-util-3.2.xsd">
-    <import resource="classpath:dao-applicationContext.xml" />
-    <import resource="classpath:auth-springbeans.xml" />
+    <context:annotation-config/>
+    <context:component-scan base-package="com.circular.browser.dao" />
 </beans>

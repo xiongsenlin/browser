@@ -10,7 +10,8 @@
         <module>circular-common</module>
         <module>circular-auth</module>
         <module>circular-web</module>
-        <module>circular-thriftclient</module>
+        <module>circular-thrift</module>
+        <module>circular-dao</module>
     </modules>
 
     <profiles>
@@ -71,6 +72,21 @@
             <dependency>
                 <groupId>com.circular</groupId>
                 <artifactId>circular-auth</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.circular</groupId>
+                <artifactId>circular-dao</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.circular</groupId>
+                <artifactId>circular-thrift</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.circular</groupId>
+                <artifactId>circular-web</artifactId>
                 <version>${project.version}</version>
             </dependency>
 

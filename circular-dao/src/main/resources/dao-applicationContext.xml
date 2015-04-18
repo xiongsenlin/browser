@@ -10,6 +10,7 @@
 				http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
 				http://www.springframework.org/schema/util
 				http://www.springframework.org/schema/util/spring-util-3.2.xsd">
-    <import resource="classpath:dao-applicationContext.xml" />
-    <import resource="classpath:auth-springbeans.xml" />
+    <util:properties id="fieldPlaceHolder" location="${project.basedir}/../${deploy.env}.properties" />
+    <import resource="classpath:dao-datasource.xml" />
+    <import resource="classpath:dao-springbeans.xml" />
 </beans>
