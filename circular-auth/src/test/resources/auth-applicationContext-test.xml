@@ -10,7 +10,7 @@
 				http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
 				http://www.springframework.org/schema/util
 				http://www.springframework.org/schema/util/spring-util-3.2.xsd">
-    <util:properties id="fieldPlaceHolder" location="classpath:conf/${deploy.env}.properties" />
-    <import resource="classpath:auth-datasource.xml" />
-    <import resource="classpath:auth-springbeans.xml" />
+    <util:properties id="fieldPlaceHolder" location="classpath:daily-test.properties" />
+    <import resource="classpath:auth-datasource-test.xml" />
+    <import resource="classpath:auth-springbeans-test.xml" />
 </beans>

@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.circular.browser.auth.dao.mapper.AccountMapper" >
-  <resultMap id="BaseResultMap" type="com.circular.browser.auth.dao.model.Account" >
+<mapper namespace="com.circular.browser.auth.dao.mapper.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.circular.browser.auth.dao.model.User" >
     <id column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="login_id" property="loginId" jdbcType="VARCHAR" />
     <result column="user_phone_number" property="userPhoneNumber" jdbcType="VARCHAR" />
     <result column="user_nickname" property="userNickname" jdbcType="VARCHAR" />
+    <result column="user_birthday" property="userBirthday" jdbcType="DATE" />
+    <result column="user_gender" property="userGender" jdbcType="TINYINT" />
     <result column="user_tiny_img" property="userTinyImg" jdbcType="VARCHAR" />
     <result column="user_status" property="userStatus" jdbcType="TINYINT" />
     <result column="user_level" property="userLevel" jdbcType="TINYINT" />
@@ -73,16 +76,17 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    user_id, user_phone_number, user_nickname, user_tiny_img, user_status, user_level, 
-    user_address, user_logo, user_email, create_time, update_time
+    user_id, login_id, user_phone_number, user_nickname, user_birthday, user_gender, 
+    user_tiny_img, user_status, user_level, user_address, user_logo, user_email, create_time, 
+    update_time
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.circular.browser.auth.dao.model.AccountExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.circular.browser.auth.dao.model.UserExample" >
     select
     <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from account
+    from user
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -93,40 +97,51 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
-    from account
+    from user
     where user_id = #{userId,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
-    delete from account
+    delete from user
     where user_id = #{userId,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.circular.browser.auth.dao.model.AccountExample" >
-    delete from account
+  <delete id="deleteByExample" parameterType="com.circular.browser.auth.dao.model.UserExample" >
+    delete from user
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.circular.browser.auth.dao.model.Account" >
-    insert into account (user_id, user_phone_number, user_nickname, 
+  <insert id="insert" parameterType="com.circular.browser.auth.dao.model.User" >
+    insert into user (user_id, login_id, user_phone_number, 
+      user_nickname, user_birthday, user_gender, 
       user_tiny_img, user_status, user_level, 
       user_address, user_logo, user_email, 
       create_time, update_time)
-    values (#{userId,jdbcType=BIGINT}, #{userPhoneNumber,jdbcType=VARCHAR}, #{userNickname,jdbcType=VARCHAR}, 
+    values (#{userId,jdbcType=BIGINT}, #{loginId,jdbcType=VARCHAR}, #{userPhoneNumber,jdbcType=VARCHAR}, 
+      #{userNickname,jdbcType=VARCHAR}, #{userBirthday,jdbcType=DATE}, #{userGender,jdbcType=TINYINT}, 
       #{userTinyImg,jdbcType=VARCHAR}, #{userStatus,jdbcType=TINYINT}, #{userLevel,jdbcType=TINYINT}, 
       #{userAddress,jdbcType=VARCHAR}, #{userLogo,jdbcType=VARCHAR}, #{userEmail,jdbcType=VARCHAR}, 
       #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.circular.browser.auth.dao.model.Account" >
-    insert into account
+  <insert id="insertSelective" parameterType="com.circular.browser.auth.dao.model.User" >
+    insert into user
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="userId != null" >
         user_id,
+      </if>
+      <if test="loginId != null" >
+        login_id,
       </if>
       <if test="userPhoneNumber != null" >
         user_phone_number,
       </if>
       <if test="userNickname != null" >
         user_nickname,
+      </if>
+      <if test="userBirthday != null" >
+        user_birthday,
+      </if>
+      <if test="userGender != null" >
+        user_gender,
       </if>
       <if test="userTinyImg != null" >
         user_tiny_img,
@@ -157,11 +172,20 @@
       <if test="userId != null" >
         #{userId,jdbcType=BIGINT},
       </if>
+      <if test="loginId != null" >
+        #{loginId,jdbcType=VARCHAR},
+      </if>
       <if test="userPhoneNumber != null" >
         #{userPhoneNumber,jdbcType=VARCHAR},
       </if>
       <if test="userNickname != null" >
         #{userNickname,jdbcType=VARCHAR},
+      </if>
+      <if test="userBirthday != null" >
+        #{userBirthday,jdbcType=DATE},
+      </if>
+      <if test="userGender != null" >
+        #{userGender,jdbcType=TINYINT},
       </if>
       <if test="userTinyImg != null" >
         #{userTinyImg,jdbcType=VARCHAR},
@@ -189,23 +213,32 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.circular.browser.auth.dao.model.AccountExample" resultType="java.lang.Integer" >
-    select count(*) from account
+  <select id="countByExample" parameterType="com.circular.browser.auth.dao.model.UserExample" resultType="java.lang.Integer" >
+    select count(*) from user
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update account
+    update user
     <set >
       <if test="record.userId != null" >
         user_id = #{record.userId,jdbcType=BIGINT},
+      </if>
+      <if test="record.loginId != null" >
+        login_id = #{record.loginId,jdbcType=VARCHAR},
       </if>
       <if test="record.userPhoneNumber != null" >
         user_phone_number = #{record.userPhoneNumber,jdbcType=VARCHAR},
       </if>
       <if test="record.userNickname != null" >
         user_nickname = #{record.userNickname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userBirthday != null" >
+        user_birthday = #{record.userBirthday,jdbcType=DATE},
+      </if>
+      <if test="record.userGender != null" >
+        user_gender = #{record.userGender,jdbcType=TINYINT},
       </if>
       <if test="record.userTinyImg != null" >
         user_tiny_img = #{record.userTinyImg,jdbcType=VARCHAR},
@@ -237,10 +270,13 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update account
+    update user
     set user_id = #{record.userId,jdbcType=BIGINT},
+      login_id = #{record.loginId,jdbcType=VARCHAR},
       user_phone_number = #{record.userPhoneNumber,jdbcType=VARCHAR},
       user_nickname = #{record.userNickname,jdbcType=VARCHAR},
+      user_birthday = #{record.userBirthday,jdbcType=DATE},
+      user_gender = #{record.userGender,jdbcType=TINYINT},
       user_tiny_img = #{record.userTinyImg,jdbcType=VARCHAR},
       user_status = #{record.userStatus,jdbcType=TINYINT},
       user_level = #{record.userLevel,jdbcType=TINYINT},
@@ -253,14 +289,23 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.circular.browser.auth.dao.model.Account" >
-    update account
+  <update id="updateByPrimaryKeySelective" parameterType="com.circular.browser.auth.dao.model.User" >
+    update user
     <set >
+      <if test="loginId != null" >
+        login_id = #{loginId,jdbcType=VARCHAR},
+      </if>
       <if test="userPhoneNumber != null" >
         user_phone_number = #{userPhoneNumber,jdbcType=VARCHAR},
       </if>
       <if test="userNickname != null" >
         user_nickname = #{userNickname,jdbcType=VARCHAR},
+      </if>
+      <if test="userBirthday != null" >
+        user_birthday = #{userBirthday,jdbcType=DATE},
+      </if>
+      <if test="userGender != null" >
+        user_gender = #{userGender,jdbcType=TINYINT},
       </if>
       <if test="userTinyImg != null" >
         user_tiny_img = #{userTinyImg,jdbcType=VARCHAR},
@@ -289,10 +334,13 @@
     </set>
     where user_id = #{userId,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.circular.browser.auth.dao.model.Account" >
-    update account
-    set user_phone_number = #{userPhoneNumber,jdbcType=VARCHAR},
+  <update id="updateByPrimaryKey" parameterType="com.circular.browser.auth.dao.model.User" >
+    update user
+    set login_id = #{loginId,jdbcType=VARCHAR},
+      user_phone_number = #{userPhoneNumber,jdbcType=VARCHAR},
       user_nickname = #{userNickname,jdbcType=VARCHAR},
+      user_birthday = #{userBirthday,jdbcType=DATE},
+      user_gender = #{userGender,jdbcType=TINYINT},
       user_tiny_img = #{userTinyImg,jdbcType=VARCHAR},
       user_status = #{userStatus,jdbcType=TINYINT},
       user_level = #{userLevel,jdbcType=TINYINT},

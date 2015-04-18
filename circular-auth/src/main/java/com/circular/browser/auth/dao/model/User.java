@@ -3,12 +3,18 @@ package com.circular.browser.auth.dao.model;
 import com.circular.browser.auth.base.BaseObject;
 import java.util.Date;
 
-public class Account extends BaseObject {
+public class User extends BaseObject {
     private Long userId;
+
+    private String loginId;
 
     private String userPhoneNumber;
 
     private String userNickname;
+
+    private Date userBirthday;
+
+    private Byte userGender;
 
     private String userTinyImg;
 
@@ -34,6 +40,14 @@ public class Account extends BaseObject {
         this.userId = userId;
     }
 
+    public String getLoginId() {
+        return loginId;
+    }
+
+    public void setLoginId(String loginId) {
+        this.loginId = loginId == null ? null : loginId.trim();
+    }
+
     public String getUserPhoneNumber() {
         return userPhoneNumber;
     }
@@ -48,6 +62,22 @@ public class Account extends BaseObject {
 
     public void setUserNickname(String userNickname) {
         this.userNickname = userNickname == null ? null : userNickname.trim();
+    }
+
+    public Date getUserBirthday() {
+        return userBirthday;
+    }
+
+    public void setUserBirthday(Date userBirthday) {
+        this.userBirthday = userBirthday;
+    }
+
+    public Byte getUserGender() {
+        return userGender;
+    }
+
+    public void setUserGender(Byte userGender) {
+        this.userGender = userGender;
     }
 
     public String getUserTinyImg() {
@@ -125,10 +155,13 @@ public class Account extends BaseObject {
         if (getClass() != that.getClass()) {
             return false;
         }
-        Account other = (Account) that;
+        User other = (User) that;
         return (this.getUserId() == null ? other.getUserId() == null : this.getUserId().equals(other.getUserId()))
+            && (this.getLoginId() == null ? other.getLoginId() == null : this.getLoginId().equals(other.getLoginId()))
             && (this.getUserPhoneNumber() == null ? other.getUserPhoneNumber() == null : this.getUserPhoneNumber().equals(other.getUserPhoneNumber()))
             && (this.getUserNickname() == null ? other.getUserNickname() == null : this.getUserNickname().equals(other.getUserNickname()))
+            && (this.getUserBirthday() == null ? other.getUserBirthday() == null : this.getUserBirthday().equals(other.getUserBirthday()))
+            && (this.getUserGender() == null ? other.getUserGender() == null : this.getUserGender().equals(other.getUserGender()))
             && (this.getUserTinyImg() == null ? other.getUserTinyImg() == null : this.getUserTinyImg().equals(other.getUserTinyImg()))
             && (this.getUserStatus() == null ? other.getUserStatus() == null : this.getUserStatus().equals(other.getUserStatus()))
             && (this.getUserLevel() == null ? other.getUserLevel() == null : this.getUserLevel().equals(other.getUserLevel()))
@@ -144,8 +177,11 @@ public class Account extends BaseObject {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((getUserId() == null) ? 0 : getUserId().hashCode());
+        result = prime * result + ((getLoginId() == null) ? 0 : getLoginId().hashCode());
         result = prime * result + ((getUserPhoneNumber() == null) ? 0 : getUserPhoneNumber().hashCode());
         result = prime * result + ((getUserNickname() == null) ? 0 : getUserNickname().hashCode());
+        result = prime * result + ((getUserBirthday() == null) ? 0 : getUserBirthday().hashCode());
+        result = prime * result + ((getUserGender() == null) ? 0 : getUserGender().hashCode());
         result = prime * result + ((getUserTinyImg() == null) ? 0 : getUserTinyImg().hashCode());
         result = prime * result + ((getUserStatus() == null) ? 0 : getUserStatus().hashCode());
         result = prime * result + ((getUserLevel() == null) ? 0 : getUserLevel().hashCode());
@@ -164,8 +200,11 @@ public class Account extends BaseObject {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", userId=").append(userId);
+        sb.append(", loginId=").append(loginId);
         sb.append(", userPhoneNumber=").append(userPhoneNumber);
         sb.append(", userNickname=").append(userNickname);
+        sb.append(", userBirthday=").append(userBirthday);
+        sb.append(", userGender=").append(userGender);
         sb.append(", userTinyImg=").append(userTinyImg);
         sb.append(", userStatus=").append(userStatus);
         sb.append(", userLevel=").append(userLevel);

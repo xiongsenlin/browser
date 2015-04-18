@@ -9,13 +9,15 @@
     <modules>
         <module>circular-common</module>
         <module>circular-auth</module>
+        <module>circular-web</module>
+        <module>circular-thriftclient</module>
     </modules>
 
     <profiles>
         <profile>
             <id>daily</id>
             <properties>
-                <props>daily</props>
+                <deploy.env>daily</deploy.env>
             </properties>
             <activation>
                 <activeByDefault>true</activeByDefault>
@@ -24,7 +26,7 @@
         <profile>
             <id>publish</id>
             <properties>
-                <props>publish</props>
+                <deploy.env>publish</deploy.env>
             </properties>
         </profile>
     </profiles>
@@ -54,6 +56,9 @@
         <jpush.client.version>3.1.3</jpush.client.version>
         <slf4j.version>1.7.5</slf4j.version>
         <thrift.version>0.9.0</thrift.version>
+        <redis.clients.version>2.6.0</redis.clients.version>
+        <spring.redis.version>1.4.1.RELEASE</spring.redis.version>
+        <aspectjweaver.version>1.8.0</aspectjweaver.version>
     </properties>
 
     <dependencyManagement>
@@ -165,13 +170,18 @@
                 <artifactId>slf4j-log4j12</artifactId>
                 <version>${slf4j.version}</version>
             </dependency>
+
             <!-- 其它的一些依赖 -->
+            <dependency>
+                <groupId>org.aspectj</groupId>
+                <artifactId>aspectjweaver</artifactId>
+                <version>${aspectjweaver.version}</version>
+            </dependency>
             <dependency>
                 <groupId>com.google.code.gson</groupId>
                 <artifactId>gson</artifactId>
                 <version>${google.gson.version}</version>
             </dependency>
-
             <dependency>
                 <groupId>javax.servlet</groupId>
                 <artifactId>servlet-api</artifactId>
@@ -192,37 +202,31 @@
                 <artifactId>jackson-mapper-asl</artifactId>
                 <version>${jackson.version}</version>
             </dependency>
-
             <dependency>
                 <groupId>commons-fileupload</groupId>
                 <artifactId>commons-fileupload</artifactId>
                 <version>${commons.fileupload.version}</version>
             </dependency>
-
             <dependency>
                 <groupId>com.googlecode.json-simple</groupId>
                 <artifactId>json-simple</artifactId>
                 <version>${json.simple.version}</version>
             </dependency>
-
             <dependency>
                 <groupId>commons-httpclient</groupId>
                 <artifactId>commons-httpclient</artifactId>
                 <version>${commons.httpclient.version}</version>
             </dependency>
-
             <dependency>
                 <groupId>jstl</groupId>
                 <artifactId>jstl</artifactId>
                 <version>${jstl.version}</version>
             </dependency>
-
             <dependency>
                 <groupId>taglibs</groupId>
                 <artifactId>standard</artifactId>
                 <version>${taglibs.version}</version>
             </dependency>
-
             <dependency>
                 <groupId>cn.jpush.api</groupId>
                 <artifactId>jpush-client</artifactId>
@@ -239,6 +243,16 @@
                 <groupId>org.apache.thrift</groupId>
                 <artifactId>libthrift</artifactId>
                 <version>${thrift.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>redis.clients</groupId>
+                <artifactId>jedis</artifactId>
+                <version>${redis.clients.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.data</groupId>
+                <artifactId>spring-data-redis</artifactId>
+                <version>${spring.redis.version}</version>
             </dependency>
 
         </dependencies>

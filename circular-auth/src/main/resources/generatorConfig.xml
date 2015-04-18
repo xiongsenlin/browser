@@ -14,7 +14,7 @@
 
         <!-- 数据库连接设置 -->
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://121.42.197.37:3306/auth" userId="root"
+                        connectionURL="jdbc:mysql://121.42.197.37:3306/user" userId="root"
                         password="circular123" />
 
         <!-- 表示对于数据库中的decimal和numeric类型，是否要强制转换为java中的bigdecimal -->
@@ -40,8 +40,8 @@
             <property name="enableSubPackages" value="true" />
         </javaClientGenerator>
 
-        <table tableName="account"
-               domainObjectName="Account"
+        <table tableName="user"
+               domainObjectName="User"
                enableInsert="true"
                enableSelectByPrimaryKey="true"
                enableSelectByExample="true"
@@ -52,6 +52,8 @@
                enableUpdateByExample="true">
 
             <property name="rootInterface" value="com.circular.browser.auth.base.MysqlMapper" />
+            <property name="rootClass" value="com.circular.browser.auth.base.BaseObject" />
+
         </table>
 
     </context>

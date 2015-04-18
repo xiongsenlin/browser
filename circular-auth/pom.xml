@@ -80,18 +80,41 @@
             <groupId>commons-logging</groupId>
             <artifactId>commons-logging</artifactId>
         </dependency>
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>org.aspectj</groupId>
             <artifactId>aspectjweaver</artifactId>
-            <version>1.8.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-redis</artifactId>
+        </dependency>
+
+
+        <!-- module独有的依赖 -->
+        <dependency>
+            <groupId>message-sender</groupId>
+            <artifactId>message-sender</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/src/main/resources/lib/message-sender.jar</systemPath>
         </dependency>
 
     </dependencies>
 
     <build>
         <filters>
-            <filter>src/main/resources/conf/${props}.properties</filter>
+            <filter>src/main/resources/conf/${deploy.env}.properties</filter>
         </filters>
         <resources>
             <resource>
@@ -144,12 +167,8 @@
                 </configuration>
                 <executions>
                     <execution>
-                        <id>generate-thrift-java</id>
+                        <id>thrift-sources</id>
                         <phase>generate-sources</phase>
-                        <configuration>
-                            <generator>java</generator>
-                            <outputDirectory>${basedir}/src/main/java/</outputDirectory>
-                        </configuration>
                         <goals>
                             <goal>compile</goal>
                         </goals>
